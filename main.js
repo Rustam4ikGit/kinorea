@@ -2,12 +2,12 @@ let base_url = "https://api.themoviedb.org/3"
 let cont = document.querySelector('.container')
 let show_all = document.querySelector(".show_all")
 let bg_dv = document.querySelector('.bg_dv')
+let img_post_new = document.querySelectorAll('.img_post_new')
 fetch(base_url + '/movie/now_playing?language=ru', {
     headers: {
         Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3OTBjOTVlMDk4NWEyZTMzOGFlYTg1MGE3NmI4ZWJkYSIsInN1YiI6IjY1NTYwNTAzNjdiNjEzNDVkYmMxMzM4MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.8vyyF9E6X99GgYd-5H6vLMKAn9jq7ik3ze9-zfOwsQw'
     }
 }).then(res => res.json())
-
   .then(res => reload(res.results, cont))
 
 show_all.onclick = () => {
@@ -45,8 +45,19 @@ function reload(arr, place) {
         }else{
             vote_average.style.backgroundColor = '#89CB36 !important'
         }
-        // img.onmouseenter = () => {
-        //     bg_dv.style.backgroundImage = `url("https://image.tmdb.org/t/p/w500${item.backdrop_path}")`;
-        // }
     }
 }
+img_post_new.forEach((mouse) => {
+    mouse.onmouseenter = () => {
+        // bg_dv.style.backgroundImage = `url("https://image.tmdb.org/t/p/w500${item.backdrop_path}")`;
+        mouse.style.background = 'rgba(54, 87, 203, 0.65);'
+        mouse.style.transition = ".4s ease"
+    }
+})
+
+fetch(base_url + '/movie/changes?page=1', {
+    headers: {
+        Authorization: 'Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3OTBjOTVlMDk4NWEyZTMzOGFlYTg1MGE3NmI4ZWJkYSIsInN1YiI6IjY1NTYwNTAzNjdiNjEzNDVkYmMxMzM4MyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.8vyyF9E6X99GgYd-5H6vLMKAn9jq7ik3ze9-zfOwsQw'
+    }
+}).then(res => res.json())
+  .then(res => console.log(res))
