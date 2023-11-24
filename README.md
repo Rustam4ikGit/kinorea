@@ -1,1 +1,3 @@
 # kinorea
+# kinarea
+# kinarea
